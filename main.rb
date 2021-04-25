@@ -113,6 +113,7 @@ class RailRoad
     puts 'Введите название станции'
     z = gets.chomp
     station = Station.new(z)
+    puts "Создана станция #{z}"
   rescue
     puts 'Название станции не может быть пустым'
     create_station
@@ -122,6 +123,7 @@ class RailRoad
     puts 'Введите номер поезда в формате ***-** или *****. Примечание * - цифра или буква'
     z = gets.chomp
     train = Train.new(z)
+    puts "Создан поезд номер #{z}"
   rescue RuntimeError => e
     puts 'Неверный формат '
     create_train 
