@@ -1,18 +1,18 @@
 class Train
   NUMBER_FORMAT = /^[\d\w]{3}[-]?[\d\w]{2}$/
   @@all = []
-  #include Company
-  #include InstanceCounter
+  include Company
+  include InstanceCounter
   attr_accessor :speed
   attr_reader :number, :type
 
   
   def initialize(number)
     @number = number
-    @@all << self
     @wagon = []
-    #register_instance
     validate!
+    register_instance
+    @@all << self
   end
   
   def self.find(number)
@@ -24,12 +24,6 @@ class Train
     true
   rescue
     false
-  end
-
-  def validate!
-    raise "Number can't be nil" if number.nil?
-    raise "Number should be at least 6 symbols" if number.length < 5
-    raise "Number has invalid format" if number !~ NUMBER_FORMAT
   end
 
   def add_wagon(wagon)
@@ -85,5 +79,14 @@ class Train
       @last_train_station = @train_route[@index - 1]
     end
   end
+
+  private
+
+  def validate!
+    raise "Number can't be nil" if number.nil?
+    raise "Number should be at least 6 symbols" if number.length < 5
+    raise "Number has invalid format" if number !~ NUMBER_FORMAT
+  end
+
 end
 
